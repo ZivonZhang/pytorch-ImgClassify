@@ -63,9 +63,11 @@ def train(**kwargs):
                         shuffle=False,num_workers=opt.num_workers)
     
     # step3: criterion and optimizer
+    from torch.optim import SGD
     criterion = t.nn.CrossEntropyLoss()
     lr = opt.lr
-    optimizer = model.get_optimizer(lr, opt.weight_decay)
+    #optimizer = model.get_optimizer(lr, opt.weight_decay)
+    optimizer = SGD(model.parameters(), lr, weight_decay=opt.weight_decay)
         
     # step4: meters
     loss_meter = meter.AverageValueMeter()
